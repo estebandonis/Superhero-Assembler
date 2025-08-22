@@ -7,13 +7,14 @@ export const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     backgroundColor: Colors.dark.background,
+    paddingHorizontal: 12,
   },
   titleContainer: {
     width: '100%',
     alignItems: 'flex-start',
     justifyContent: 'center',
-    backgroundColor: Colors.dark.background,
-    padding: 16,
+    backgroundColor: 'transparent',
+    paddingVertical: 16,
     gap: 25,
   },
   title: {
@@ -25,7 +26,7 @@ export const styles = StyleSheet.create({
     width: '100%',
     borderRadius: 20,
     height: 40,
-    backgroundColor: Colors.dark.SecondBackground,
+    backgroundColor: Colors.dark.thirdBackground,
     paddingHorizontal: 10,
   },
   superheroesContainer: {

@@ -17,7 +17,7 @@ export default function TabOneScreen() {
         <TextInput style={styles.superheroInput} placeholder='Buscar' placeholderTextColor={'gray'} />
       </View>
       <ScrollView style={styles.superheroesContainer}>
-        <SuperheroPreview name='Superman' description='Man of Steel' />
+        <SuperheroPreview heroName='Superman' realName='Clark Kent' powerRate={95} />
       </ScrollView>
     </SafeAreaView>
   );

@@ -9,13 +9,16 @@ export default {
     tabIconDefault: '#ccc',
     tabIconSelected: tintColorLight,
     SecondBackground: '#0D0533',
+    thirdBackground: '#E4E4E4',
   },
   dark: {
     text: '#fff',
+    secondText: '#665F89',
     background: '#0D0533',
     tint: tintColorDark,
     tabIconDefault: '#ccc',
     tabIconSelected: tintColorDark,
-    SecondBackground: '#524882',
+    secondBackground: '#2C1E5F',
+    thirdBackground: '#524882',
   },
 };

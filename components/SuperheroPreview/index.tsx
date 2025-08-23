@@ -5,7 +5,7 @@ import { styles } from './style';
 import { Button, Image, Touchable, TouchableOpacity } from 'react-native';
 
 interface SuperheroPreviewProps {
-    heroName: string[];
+    heroName: string;
     realName: string;
     imageUrl: string;
     powerRate: number;
@@ -13,8 +13,8 @@ interface SuperheroPreviewProps {
 
 export default function SuperheroPreview({ heroName, realName, imageUrl, powerRate }: SuperheroPreviewProps) {
 
-    const TextName = (heroName: string[], name: string) => {
-        if (heroName.length > 0) return <Text style={styles.name}>{heroName.slice(0, 1).join(', ')}</Text>;
+    const TextName = (heroName: string, name: string) => {
+        if (heroName) return <Text style={styles.name}>{heroName}</Text>;
         return <Text style={styles.name}>Unknown</Text>;
     };
 

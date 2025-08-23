@@ -1,18 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 
 import { powerLevelCalculation } from "@/utils/Calculations";
-
-export type hero = {
-  id: number;
-  aliases: string[];
-  fullName: string;
-  imagePreview: string;
-  image: string;
-  powerLevel: number;
-  powerstats: {
-    [key: string]: number;
-  };
-};
+import { hero } from "@/types";
 
 const fetchHeroes = async () => {
   const response = await fetch(
@@ -28,7 +17,7 @@ const fetchHeroes = async () => {
   for (const hero of responseJson) {
     heroes.push({
       id: hero.id,
-      aliases: hero.biography.aliases,
+      alias: hero.biography.aliases[0],
       fullName: hero.biography.fullName,
       imagePreview: hero.images.xs,
       image: hero.images.md,

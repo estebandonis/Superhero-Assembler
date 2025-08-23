@@ -1,6 +1,6 @@
 import { TextInput, ScrollView, FlatList } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { hero } from '@/api';
+import { hero } from '@/types';
 
 import { 
   SuperheroPreview, 
@@ -18,18 +18,13 @@ export default function SuperHeroesScreen() {
 
   const filteredHeroes = useMemo(() => heroes?.filter((hero) =>
     hero.fullName.toLowerCase().includes(searchTerm.toLowerCase()) ||
-    hero.aliases.slice(0, 1).some((alias) =>
-    alias.toLowerCase().includes(searchTerm.toLowerCase())
-  )), [heroes, searchTerm]);
-
-  if (isLoading) {
-    return <Text>Loading...</Text>;
-  }
+    hero.alias.toLowerCase().includes(searchTerm.toLowerCase())
+  ), [heroes, searchTerm]);
 
   const renderItem = ({ item: hero }: { item: hero }) => (
     <SuperheroPreview
       key={hero.id}
-      heroName={hero.aliases}
+      heroName={hero.alias}
       realName={hero.fullName}
       imageUrl={hero.imagePreview}
       powerRate={hero.powerLevel}
@@ -44,6 +39,16 @@ export default function SuperHeroesScreen() {
       }}
     />
   );
+
+  if (isLoading) {
+    return (
+      <SafeAreaView style={styles.container}>
+        <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+          <Text>Loading...</Text>
+        </View>
+      </SafeAreaView>
+    );
+  }
 
   return (
     <SafeAreaView edges={['top']} style={styles.container}>

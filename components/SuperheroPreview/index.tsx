@@ -1,8 +1,8 @@
-import { MaterialIcons, Ionicons } from '@expo/vector-icons';
+import { MaterialIcons, Ionicons, FontAwesome6 } from '@expo/vector-icons';
 import { Image, TouchableOpacity } from 'react-native';
 import { useRouter } from 'expo-router';
 
-import { View, Text } from '@/components/Themed';
+import { View, Text, RoundedButtonWithIcon } from '@/components';
 import { styles } from './style';
 import { hero } from '@/types';
 
@@ -36,14 +36,20 @@ export default function SuperheroPreview({ hero }: SuperheroPreviewProps) {
                 source={{ uri: hero.imagePreview }}
                 style={styles.imagePreview}
             />
-            <TouchableOpacity
+            <RoundedButtonWithIcon
                 style={styles.favoriteButton}
+                icon={
+                    <FontAwesome6
+                        solid={hero.favorite ? true : false}
+                        name="heart"
+                        size={16}
+                        color="white"
+                    />
+                }
                 onPress={() => {
-                    // handle heart press here
+                    // Handle info button press
                 }}
-            >
-                <MaterialIcons name="favorite" size={24} color="white" />
-            </TouchableOpacity>
+            />
             <View style={styles.informationContainer}>
                 {TextName(hero.alias, hero.fullName)}
                 {TextRealName(hero.fullName)}

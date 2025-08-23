@@ -1,10 +1,10 @@
 import { SafeAreaView } from "react-native-safe-area-context";
-import { Button, Image, StyleSheet } from "react-native";
+import { Button, Image, StyleSheet, TouchableOpacity } from "react-native";
 import { useRouter, useLocalSearchParams } from "expo-router";
 
-import { Text, View } from "@/components";
+import { Text, View, RoundedButtonWithIcon } from "@/components";
 import Colors from "@/constants/Colors";
-import { Ionicons } from "@expo/vector-icons";
+import { Ionicons, FontAwesome6 } from "@expo/vector-icons";
 import { useFetchHeroes } from "@/api";
 import { use, useEffect, useMemo } from "react";
 
@@ -53,16 +53,45 @@ export default function HeroDetailsPage() {
         </View>
     );
 
+    const ImageSection = ({ uri }: { uri: string }) => (
+        <View>
+            <RoundedButtonWithIcon
+                icon={
+                    <FontAwesome6
+                        name="arrow-left"
+                        size={16}
+                        color="white"
+                    />
+                }
+                onPress={() => {
+                    router.back();
+                }}
+                style={styles.backButton}
+            />
+            <RoundedButtonWithIcon
+                icon={
+                    <FontAwesome6
+                        solid={selecteHero.favorite ? true : false}
+                        name="heart"
+                        size={16}
+                        color="white"
+                    />
+                }
+                onPress={() => {
+                    // Handle favorite button press
+                }}
+                style={styles.favoriteButton}
+            />
+            <Image
+                source={{ uri }}
+                style={styles.image}
+            />
+        </View>
+    );
+
     return (
         <SafeAreaView edges={['left']} style={styles.mainContainer}>
-            <View>
-                <Image
-                    source={{ uri: selecteHero.image }}
-                    style={styles.image}
-                />
-            </View>
-            <Button title="Go Back" onPress={() => router.back()} />
-
+            <ImageSection uri={selecteHero.image} />
             <View style={styles.detailsContainer}>
                 <Text style={styles.mainText}>Alias: {selecteHero.alias}</Text>
                 <View style={styles.subTextsContainer}>
@@ -144,10 +173,22 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         backgroundColor: 'transparent',
         gap: 4,
+        width: 150,
     },
     averageScoreText: {
         color: Colors.dark.text,
         fontSize: 12,
-        width: 100,
     },
+    backButton: {
+        position: 'absolute',
+        top: 60,
+        left: 30,
+        zIndex: 10,
+    },
+    favoriteButton: {
+        position: 'absolute',
+        top: 60,
+        right: 30,
+        zIndex: 10,
+    }
 });

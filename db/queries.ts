@@ -9,6 +9,7 @@ const createHeroesTable = async (db: SQLiteDatabase) => {
         image TEXT,
         power_level INTEGER,
         power_stats TEXT,
+        alter_egos TEXT,
         is_favorite BOOLEAN DEFAULT False
     );`;
 

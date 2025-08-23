@@ -1,4 +1,5 @@
 import { MaterialIcons, Ionicons } from '@expo/vector-icons';
+import { useRouter } from 'expo-router';
 
 import { View, Text } from '@/components/Themed';
 import { styles } from './style';
@@ -13,6 +14,8 @@ interface SuperheroPreviewProps {
 
 export default function SuperheroPreview({ heroName, realName, imageUrl, powerRate }: SuperheroPreviewProps) {
 
+    const router = useRouter();
+
     const TextName = (heroName: string, name: string) => {
         if (heroName) return <Text style={styles.name}>{heroName}</Text>;
         return <Text style={styles.name}>Unknown</Text>;
@@ -24,7 +27,7 @@ export default function SuperheroPreview({ heroName, realName, imageUrl, powerRa
     };
 
     return (
-        <View style={styles.container}>
+        <TouchableOpacity onPress={() => {router.push('/hero_details')}} style={styles.container}>
             <Image
                 source={{ uri: imageUrl }}
                 style={styles.imagePreview}
@@ -46,6 +49,6 @@ export default function SuperheroPreview({ heroName, realName, imageUrl, powerRa
                     <Text style={styles.percentage}>/100</Text>
                 </View>
             </View>
-        </View>
+        </TouchableOpacity>
     );
 }

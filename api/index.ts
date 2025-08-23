@@ -19,8 +19,8 @@ const fetchHeroes = async () => {
       id: hero.id,
       alias: hero.biography.aliases[0],
       fullName: hero.biography.fullName,
-      imagePreview: hero.images.xs,
-      image: hero.images.md,
+      imagePreview: hero.images.sm,
+      image: hero.images.lg,
       powerLevel: powerLevelCalculation(hero.powerstats),
       powerstats: hero.powerstats,
     });

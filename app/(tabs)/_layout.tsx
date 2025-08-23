@@ -30,16 +30,25 @@ export default function TabLayout() {
       <Tabs.Screen
         name="index/index"
         options={{
-          title: 'Tab One',
+          title: 'Superheroes',
           headerShown: false,
-          tabBarIcon: ({ color }) => <TabBarIcon name="code" color={color} />,
+          tabBarIcon: ({ color }) => <TabBarIcon name="lock" color={color} />,
         }}
       />
       <Tabs.Screen
-        name="two"
+        name="favorites/index"
         options={{
-          title: 'Tab Two',
-          tabBarIcon: ({ color }) => <TabBarIcon name="code" color={color} />,
+          title: 'Favorites',
+          headerShown: false,
+          tabBarIcon: ({ color }) => <TabBarIcon name="heart" color={color} />,
+        }}
+      />
+      <Tabs.Screen
+        name="teams/index"
+        options={{
+          title: 'Teams',
+          headerShown: false,
+          tabBarIcon: ({ color }) => <TabBarIcon name="users" color={color} />,
         }}
       />
     </Tabs>

@@ -12,10 +12,19 @@ import { useFetchHeroes } from '@/api';
 import { useMemo, useState } from 'react';
 import { MaterialIcons } from '@expo/vector-icons';
 
-export default function TabOneScreen() {
+export default function SuperHeroesScreen() {
   const { data: heroes, isLoading } = useFetchHeroes();
-
   const [searchTerm, setSearchTerm] = useState("");
+
+  const filteredHeroes = useMemo(() => heroes?.filter((hero) =>
+    hero.fullName.toLowerCase().includes(searchTerm.toLowerCase()) ||
+    hero.aliases.slice(0, 1).some((alias) =>
+    alias.toLowerCase().includes(searchTerm.toLowerCase())
+  )), [heroes, searchTerm]);
+
+  if (isLoading) {
+    return <Text>Loading...</Text>;
+  }
 
   const renderItem = ({ item: hero }: { item: hero }) => (
     <SuperheroPreview
@@ -27,18 +36,14 @@ export default function TabOneScreen() {
     />
   );
 
-  const itemSeparator = () => <View style={{ height: 20, backgroundColor: "transparent" }} />;
-
-  if (isLoading) {
-    return <Text>Loading...</Text>;
-  }
-
-  const filteredHeroes = useMemo(() => heroes?.filter((hero) =>
-    hero.fullName.toLowerCase().includes(searchTerm.toLowerCase()) ||
-    hero.aliases.slice(0, 1).some((alias) =>
-      alias.toLowerCase().includes(searchTerm.toLowerCase())
-    )
-  ), [heroes, searchTerm]);
+  const itemSeparator = () => (
+    <View
+      style={{
+        height: 20,
+        backgroundColor: "transparent"
+      }}
+    />
+  );
 
   return (
     <SafeAreaView edges={['top']} style={styles.container}>

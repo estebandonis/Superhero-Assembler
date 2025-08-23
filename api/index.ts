@@ -22,7 +22,8 @@ const fetchHeroes = async () => {
       imagePreview: hero.images.sm,
       image: hero.images.lg,
       powerLevel: powerLevelCalculation(hero.powerstats),
-      powerstats: hero.powerstats,
+      powerStats: hero.powerstats,
+      alterEgos: hero.biography.alterEgos,
     });
   }
 

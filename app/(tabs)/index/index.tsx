@@ -9,12 +9,18 @@ import {
 } from '@/components';
 import { styles } from './style';
 import { useFetchHeroes } from '@/api';
-import { useMemo, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { MaterialIcons } from '@expo/vector-icons';
 
 export default function SuperHeroesScreen() {
   const { data: heroes, isLoading } = useFetchHeroes();
   const [searchTerm, setSearchTerm] = useState("");
+
+  useEffect(() => {
+    if (heroes && heroes.length > 0) {
+      console.log(heroes[0]);
+    }
+  }, [heroes]);
 
   const filteredHeroes = useMemo(() => heroes?.filter((hero) =>
     hero.fullName.toLowerCase().includes(searchTerm.toLowerCase()) ||
@@ -23,11 +29,7 @@ export default function SuperHeroesScreen() {
 
   const renderItem = ({ item: hero }: { item: hero }) => (
     <SuperheroPreview
-      key={hero.id}
-      heroName={hero.alias}
-      realName={hero.fullName}
-      imageUrl={hero.imagePreview}
-      powerRate={hero.powerLevel}
+      hero={hero}
     />
   );
 
@@ -43,8 +45,8 @@ export default function SuperHeroesScreen() {
   if (isLoading) {
     return (
       <SafeAreaView style={styles.container}>
-        <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-          <Text>Loading...</Text>
+        <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center', backgroundColor: 'transparent' }}>
+          <Text style={{ color: 'white' }}>Loading...</Text>
         </View>
       </SafeAreaView>
     );

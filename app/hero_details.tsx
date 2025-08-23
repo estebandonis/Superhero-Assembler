@@ -1,21 +1,28 @@
 import { SafeAreaView } from "react-native-safe-area-context";
 import { Button, Image, StyleSheet } from "react-native";
-import { useRouter } from "expo-router";
+import { useRouter, useLocalSearchParams } from "expo-router";
 
 import { Text, View } from "@/components";
 import Colors from "@/constants/Colors";
 import { Ionicons } from "@expo/vector-icons";
+import { useFetchHeroes } from "@/api";
+import { use, useEffect, useMemo } from "react";
 
 export default function HeroDetailsPage() {
     const router = useRouter();
+    const { id } = useLocalSearchParams();
+    const { data: heroes, isLoading } = useFetchHeroes();
 
-    const powerStats = {
-        intelligence: 75,
-        strength: 100,
-        speed: 60,
-        durability: 90,
-        power: 80,
-        combat: 85
+    if (isLoading) {
+        return <Text>Loading...</Text>;
+    }
+
+    const selecteHero = useMemo(() => 
+        heroes?.find((hero) => hero.id === Number(id))
+    , [heroes, id]);
+
+    if (!selecteHero) {
+        return <Text>Hero not found</Text>;
     }
 
     const Stat = ({ label, value }: { label: string; value: number }) => (
@@ -25,40 +32,53 @@ export default function HeroDetailsPage() {
         </View>
     );
 
+    const PowerStats = ({ powerStats }: { powerStats: { [key: string]: number } }) => {
+        if (powerStats && Object.keys(powerStats).length > 0) {
+            return (
+                <View style={styles.statsContainer}>
+                    <Text style={styles.statLabel}>Power Stats:</Text>
+                    {Object.entries(powerStats).map(([key, value]) => (
+                        <Stat key={key} label={key} value={value} />
+                    ))}
+                </View>
+            );
+        }
+        return null;
+    };
+
+    const AlterEgos = ({ alterEgos }: { alterEgos: string[] }) => (
+        <View style={styles.statsContainer}>
+            <Text style={styles.statLabel}>Alter Egos:</Text>
+            <Text style={styles.statValue}>{typeof alterEgos !== "string" && alterEgos.length > 0 ? alterEgos.join(", ") : "None"}</Text>
+        </View>
+    );
+
     return (
         <SafeAreaView edges={['left']} style={styles.mainContainer}>
             <View>
                 <Image
-                    source={{ uri: "https://cdn.jsdelivr.net/gh/akabab/superhero-api@0.3.0/api/images/lg/1-a-bomb.jpg" }}
-                    style={styles.imagePreview}
+                    source={{ uri: selecteHero.image }}
+                    style={styles.image}
                 />
             </View>
             <Button title="Go Back" onPress={() => router.back()} />
 
             <View style={styles.detailsContainer}>
-                <Text style={styles.mainText}>Alias: A-Bomb</Text>
+                <Text style={styles.mainText}>Alias: {selecteHero.alias}</Text>
                 <View style={styles.subTextsContainer}>
                     <Text style={styles.secondaryText}>Real Name:
                         <Text style={{...styles.secondaryText, fontWeight: 'bold'}}>
-                            {" "}Richard Milhouse Jones
+                            {" "}{selecteHero.fullName}
                         </Text>
                     </Text>
-                    <Text style={styles.secondaryText}>Alter Egos:
-                        <Text style={{...styles.secondaryText, fontWeight: 'bold'}}>
-                            {" "}The Hulk
-                        </Text>
-                    </Text>
+                    <AlterEgos alterEgos={selecteHero.alterEgos} />
                 </View>
-                <View style={styles.statsContainer}>
-                    {Object.entries(powerStats).map(([key, value]) => (
-                        <Stat key={key} label={key} value={value} />
-                    ))}
-                </View>
+                <PowerStats powerStats={selecteHero.powerStats} />
                 <View style={styles.averageScoreContainer}>
                     <Ionicons name="star" size={12} color="gold" />
                     <Text style={styles.averageScoreText}>Avg.Score:
                         <Text style={{...styles.secondaryText, fontWeight: 'bold'}}>
-                            {" "}78
+                            {" "}{selecteHero.powerLevel}
                         </Text>
                         /100
                     </Text>
@@ -73,7 +93,7 @@ const styles = StyleSheet.create({
         flex: 1,
         backgroundColor: Colors.dark.secondBackground,
     },
-    imagePreview: {
+    image: {
         width: '100%',
         height: 400,
     },

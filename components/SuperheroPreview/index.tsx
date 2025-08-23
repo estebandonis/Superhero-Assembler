@@ -1,18 +1,16 @@
 import { MaterialIcons, Ionicons } from '@expo/vector-icons';
+import { Image, TouchableOpacity } from 'react-native';
 import { useRouter } from 'expo-router';
 
 import { View, Text } from '@/components/Themed';
 import { styles } from './style';
-import { Button, Image, Touchable, TouchableOpacity } from 'react-native';
+import { hero } from '@/types';
 
 interface SuperheroPreviewProps {
-    heroName: string;
-    realName: string;
-    imageUrl: string;
-    powerRate: number;
+    hero: hero
 }
 
-export default function SuperheroPreview({ heroName, realName, imageUrl, powerRate }: SuperheroPreviewProps) {
+export default function SuperheroPreview({ hero }: SuperheroPreviewProps) {
 
     const router = useRouter();
 
@@ -27,9 +25,15 @@ export default function SuperheroPreview({ heroName, realName, imageUrl, powerRa
     };
 
     return (
-        <TouchableOpacity onPress={() => {router.push('/hero_details')}} style={styles.container}>
+        <TouchableOpacity onPress={() => {
+            router.push({
+                pathname: '/hero_details',
+                params: { id: hero.id, }
+            })
+        }} style={styles.container}
+        >
             <Image
-                source={{ uri: imageUrl }}
+                source={{ uri: hero.imagePreview }}
                 style={styles.imagePreview}
             />
             <TouchableOpacity
@@ -41,11 +45,11 @@ export default function SuperheroPreview({ heroName, realName, imageUrl, powerRa
                 <MaterialIcons name="favorite" size={24} color="white" />
             </TouchableOpacity>
             <View style={styles.informationContainer}>
-                {TextName(heroName, realName)}
-                {TextRealName(realName)}
-                <View style={styles.powerRateContainer}>
+                {TextName(hero.alias, hero.fullName)}
+                {TextRealName(hero.fullName)}
+                <View style={styles.powerLevelContainer}>
                     <Ionicons name="hand-left" size={16} />
-                    <Text style={styles.powerRate}>{powerRate}</Text>
+                    <Text style={styles.powerLevel}>{hero.powerLevel}</Text>
                     <Text style={styles.percentage}>/100</Text>
                 </View>
             </View>

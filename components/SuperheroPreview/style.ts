@@ -43,13 +43,13 @@ export const styles = StyleSheet.create({
     fontSize: 12,
     color: Colors.dark.secondText,
   },
-  powerRateContainer: {
+  powerLevelContainer: {
     flexDirection: "row",
     alignItems: "center",
     gap: 4,
     backgroundColor: "transparent",
   },
-  powerRate: {
+  powerLevel: {
     fontSize: 12,
     color: Colors.dark.text,
   },

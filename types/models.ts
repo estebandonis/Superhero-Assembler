@@ -2,10 +2,11 @@ export type hero = {
   id: number;
   alias: string;
   fullName: string;
+  alterEgos: string[];
   imagePreview: string;
   image: string;
   powerLevel: number;
-  powerstats: {
+  powerStats: {
     [key: string]: number;
   };
   favorite?: boolean;

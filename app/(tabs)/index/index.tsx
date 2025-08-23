@@ -22,6 +22,7 @@ export default function TabOneScreen() {
       key={hero.id}
       heroName={hero.aliases}
       realName={hero.fullName}
+      imageUrl={hero.imagePreview}
       powerRate={hero.powerLevel}
     />
   );

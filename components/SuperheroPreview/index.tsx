@@ -7,10 +7,11 @@ import { Button, Image, Touchable, TouchableOpacity } from 'react-native';
 interface SuperheroPreviewProps {
     heroName: string[];
     realName: string;
+    imageUrl: string;
     powerRate: number;
 }
 
-export default function SuperheroPreview({ heroName, realName, powerRate }: SuperheroPreviewProps) {
+export default function SuperheroPreview({ heroName, realName, imageUrl, powerRate }: SuperheroPreviewProps) {
 
     const TextName = (heroName: string[], name: string) => {
         if (heroName.length > 0) return <Text style={styles.name}>{heroName.slice(0, 1).join(', ')}</Text>;
@@ -25,7 +26,7 @@ export default function SuperheroPreview({ heroName, realName, powerRate }: Supe
     return (
         <View style={styles.container}>
             <Image
-                source={{ uri: 'https://www.cinemascomics.com/wp-content/uploads/2025/04/logo-superman-2025-imagenes.jpg' }}
+                source={{ uri: imageUrl }}
                 style={styles.imagePreview}
             />
             <TouchableOpacity

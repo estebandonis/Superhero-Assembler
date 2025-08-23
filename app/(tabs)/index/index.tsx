@@ -9,22 +9,16 @@ import {
 } from '@/components';
 import { styles } from './style';
 import { useFetchHeroes } from '@/api';
-import { useEffect, useMemo, useState } from 'react';
+import { useMemo, useState } from 'react';
 import { MaterialIcons } from '@expo/vector-icons';
 
 export default function SuperHeroesScreen() {
   const { data: heroes, isLoading } = useFetchHeroes();
   const [searchTerm, setSearchTerm] = useState("");
 
-  useEffect(() => {
-    if (heroes && heroes.length > 0) {
-      console.log(heroes[0]);
-    }
-  }, [heroes]);
-
   const filteredHeroes = useMemo(() => heroes?.filter((hero) =>
-    hero.fullName.toLowerCase().includes(searchTerm.toLowerCase()) ||
-    hero.alias.toLowerCase().includes(searchTerm.toLowerCase())
+    hero.fullName.toLowerCase().startsWith(searchTerm.toLowerCase()) ||
+    hero.alias.toLowerCase().startsWith(searchTerm.toLowerCase())
   ), [heroes, searchTerm]);
 
   const renderItem = ({ item: hero }: { item: hero }) => (
@@ -32,6 +26,27 @@ export default function SuperHeroesScreen() {
       hero={hero}
     />
   );
+
+  const HeroesList = () => {
+    if (filteredHeroes && filteredHeroes.length === 0) {
+        return (
+          <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center', backgroundColor: 'transparent' }}>
+            <Text style={{ color: 'white', fontSize: 24, fontWeight: 'bold' }}>No results found</Text>
+            <Text style={{ color: 'white', fontSize: 16 }}>Try searching for another name</Text>
+          </View>
+        );
+    }
+
+    return (
+      <FlatList
+        style={styles.superheroesContainer}
+        data={filteredHeroes}
+        keyExtractor={(item) => item.id.toString()}
+        ItemSeparatorComponent={itemSeparator}
+        renderItem={renderItem}
+      />
+    );
+  }
 
   const itemSeparator = () => (
     <View
@@ -72,13 +87,7 @@ export default function SuperHeroesScreen() {
           />
         </View>
       </View>
-      <FlatList
-        style={styles.superheroesContainer}
-        data={filteredHeroes}
-        keyExtractor={(item) => item.id.toString()}
-        ItemSeparatorComponent={itemSeparator}
-        renderItem={renderItem}
-      />
+      <HeroesList />
     </SafeAreaView>
   );
 }

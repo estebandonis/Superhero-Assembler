@@ -43,7 +43,7 @@ export default function SuperheroPreview({ hero, onPress, showFavorite = true }:
                     style={styles.favoriteButton}
                     icon={
                         <FontAwesome6
-                            solid={hero.favorite ? true : false}
+                        solid={hero.favorite ? true : false}
                         name="heart"
                         size={16}
                         color="white"
@@ -57,7 +57,7 @@ export default function SuperheroPreview({ hero, onPress, showFavorite = true }:
                 {TextName(hero.alias, hero.fullName)}
                 {TextRealName(hero.fullName)}
                 <View style={styles.powerLevelContainer}>
-                    <Ionicons name="hand-left" size={16} />
+                    <FontAwesome6 name="hand-fist" size={16} color="yellow" />
                     <Text style={styles.powerLevel}>{hero.powerLevel}</Text>
                     <Text style={styles.percentage}>/100</Text>
                 </View>

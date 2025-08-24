@@ -16,7 +16,7 @@ import { team } from '@/types';
 import { useState } from 'react';
 
 const renderItem = ({ item }: { item: team }) => (
-  <TeamPreview id={item.id} title={item.name} membersCount={0} />
+  <TeamPreview id={item.id} title={item.name} membersCount={item.heroIds?.length || 0} />
 );
 
 export default function TeamList() {

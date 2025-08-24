@@ -15,4 +15,5 @@ export type hero = {
 export type team = {
   id: number;
   name: string;
+  heroIds?: number[];
 };

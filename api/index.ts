@@ -3,7 +3,12 @@ import {
   useFetchHero,
   useSetHeroFavorite,
 } from "./superheroes";
-import { useAddTeam, useFetchTeams } from "./teams";
+import {
+  useAddTeam,
+  useFetchTeams,
+  useAddHeroToTeam,
+  useDeleteHeroFromTeam,
+} from "./teams";
 
 export {
   useFetchHeroes,
@@ -11,4 +16,6 @@ export {
   useSetHeroFavorite,
   useAddTeam,
   useFetchTeams,
+  useAddHeroToTeam,
+  useDeleteHeroFromTeam,
 };

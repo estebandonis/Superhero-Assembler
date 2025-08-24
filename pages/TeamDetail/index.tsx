@@ -15,13 +15,13 @@ export default function TeamDetail() {
     const { id } = useLocalSearchParams();
 
     const [isModalVisible, setIsModalVisible] = useState(false);
-    
-    const selectedTeamMembers = [1, 2, 3];
+
     
     const selectedTeam = useMemo(() => teams?.find((team) => team.id === Number(id)), [teams, id]);
+    const selectedTeamMembers = selectedTeam?.heroIds || [];
     const selectedHeroes = useMemo(() => heroes?.filter((hero) => selectedTeamMembers.includes(hero.id)), [heroes, selectedTeamMembers]);
     
-    if (isLoading) {
+    if (!selectedTeam || isLoading) {
         return <LoadingComponent />;
     }
 
@@ -46,7 +46,7 @@ export default function TeamDetail() {
                 <ItemList items={selectedHeroes} RenderItem={({ item }) => <SuperheroPreview hero={item} onPress={() => handleSuperHeroPress(item.id)} />} />
             </View>
 
-            <AddHeroModal isVisible={isModalVisible} onClose={() => setIsModalVisible(false)} />
+            <AddHeroModal isVisible={isModalVisible} onClose={() => setIsModalVisible(false)} teamId={selectedTeam?.id} teamMembers={selectedTeamMembers} />
         </SafeAreaView>
     );
 }

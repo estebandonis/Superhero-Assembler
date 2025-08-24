@@ -86,6 +86,7 @@ export default function HeroDetailsPage() {
             <Image
                 source={{ uri }}
                 style={styles.image}
+                loadingIndicatorSource={require("@/assets/images/adaptive-icon.png")}
             />
         </View>
     );

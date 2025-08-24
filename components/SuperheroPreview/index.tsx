@@ -1,5 +1,5 @@
 import { MaterialIcons, Ionicons, FontAwesome6 } from '@expo/vector-icons';
-import { Image, TouchableOpacity } from 'react-native';
+import { ActivityIndicator, Image, TouchableOpacity } from 'react-native';
 import { useRouter } from 'expo-router';
 
 import { RoundedButtonWithIcon } from '../Buttons';
@@ -39,6 +39,7 @@ export default function SuperheroPreview({ hero }: SuperheroPreviewProps) {
             <Image
                 source={{ uri: hero.imagePreview }}
                 style={styles.imagePreview}
+                loadingIndicatorSource={require("@/assets/images/adaptive-icon.png")}
             />
             <RoundedButtonWithIcon
                 style={styles.favoriteButton}

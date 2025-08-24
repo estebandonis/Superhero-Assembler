@@ -1,6 +1,6 @@
 import { Modal, View as RNView, TouchableWithoutFeedback, KeyboardAvoidingView, Platform, TextInput, TouchableOpacity, StyleSheet } from "react-native";
 
-import { View, Text } from "@/components";
+import { View, Text } from "../Themed";
 import { useState } from "react";
 import { styles } from "./style";
 

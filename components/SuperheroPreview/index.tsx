@@ -10,9 +10,10 @@ import { hero } from '@/types';
 
 interface SuperheroPreviewProps {
     hero: hero
+    onPress?: () => void;
 }
 
-export default function SuperheroPreview({ hero }: SuperheroPreviewProps) {
+export default function SuperheroPreview({ hero, onPress }: SuperheroPreviewProps) {
 
     const { mutate: setHeroFavorite } = useSetHeroFavorite();
 
@@ -29,12 +30,7 @@ export default function SuperheroPreview({ hero }: SuperheroPreviewProps) {
     };
 
     return (
-        <TouchableOpacity onPress={() => {
-            router.push({
-                pathname: '/hero_details',
-                params: { id: hero.id, }
-            })
-        }} style={styles.container}
+        <TouchableOpacity onPress={onPress} style={styles.container}
         >
             <Image
                 source={{ uri: hero.imagePreview }}

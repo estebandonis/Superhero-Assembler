@@ -19,7 +19,7 @@ export const createHeroesTable = async (db: SQLiteDatabase) => {
 export const createTeamsTable = async (db: SQLiteDatabase) => {
   const query = `CREATE TABLE IF NOT EXISTS teams(
         id INTEGER PRIMARY KEY,
-        name TEXT NOT NULL,
+        name TEXT NOT NULL
     );`;
 
   await db.executeSql(query);

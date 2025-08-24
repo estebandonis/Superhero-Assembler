@@ -12,7 +12,7 @@ export {
 
 export const unstable_settings = {
   // Ensure that reloading on `/modal` keeps a back button present.
-  initialRouteName: 'teamlist',
+  initialRouteName: 'team_list',
 };
 
 // Prevent the splash screen from auto-hiding before asset loading is complete.
@@ -46,7 +46,8 @@ function TeamsLayoutNav() {
 
     return (
         <Stack>
-            <Stack.Screen name="teamlist" options={{ headerShown: false }} />
+            <Stack.Screen name="team_list" options={{ headerShown: false }} />
+            <Stack.Screen name="team_details" options={{ headerShown: false }} />
         </Stack>
     )
 }

@@ -5,18 +5,13 @@ import { useMemo, useState } from 'react';
 
 import { 
   ItemList,
-  SuperheroPreview, 
+  SuperheroRenderComponent,
   Text, 
-  View 
+  View,
+  LoadingComponent
 } from '@/components';
 import { hero } from '@/types';
 import { styles } from './style';
-
-const renderItem = ({ item }: { item: hero }) => (
-  <SuperheroPreview
-    hero={item}
-  />
-);
 
 interface SuperheroListProps {
     title: string;
@@ -35,11 +30,7 @@ export function SuperheroList({ title, heroes, isLoading, isError }: SuperheroLi
   
     if (isLoading) {
       return (
-        <SafeAreaView style={styles.container}>
-          <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center', backgroundColor: 'transparent' }}>
-            <Text style={{ color: 'white' }}>Loading...</Text>
-          </View>
-        </SafeAreaView>
+        <LoadingComponent />
       );
     }
   
@@ -63,7 +54,7 @@ export function SuperheroList({ title, heroes, isLoading, isError }: SuperheroLi
             />
           </View>
         </View>
-        <ItemList items={filteredHeroes} RenderItem={renderItem} />
+        <ItemList items={filteredHeroes} RenderItem={SuperheroRenderComponent} />
       </SafeAreaView>
     );
 }

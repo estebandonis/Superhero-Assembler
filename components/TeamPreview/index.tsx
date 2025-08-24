@@ -1,7 +1,7 @@
 import { TouchableOpacity } from "react-native";
 import { FontAwesome6 } from "@expo/vector-icons";
 
-import { View, Text } from "@/components";
+import { View, Text } from "../Themed";
 import { styles } from "./style";
 import Colors from "@/constants/Colors";
 import { useRouter } from "expo-router";

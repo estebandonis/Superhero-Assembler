@@ -1,7 +1,15 @@
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { FontAwesome6 } from '@expo/vector-icons';
 
-import { View, Text, RoundedButtonWithIcon, ItemList, TeamPreview, CreateTeamModal, LoadingComponent } from '@/components';
+import { 
+  View, 
+  Text,
+  RoundedButtonWithIcon,
+  ItemList,
+  TeamPreview,
+  CreateTeamModal,
+  LoadingComponent
+} from '@/components';
 import { useAddTeam, useFetchTeams } from '@/api';
 import { styles } from './style';
 import { team } from '@/types';

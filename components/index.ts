@@ -8,6 +8,8 @@ import EditScreenInfo from "./EditScreenInfo";
 import { ExternalLink } from "./ExternalLink";
 import { Text, View } from "./Themed";
 import LoadingComponent from "./LoadingComponent";
+import AddHeroModal from "./AddHeroModal";
+import TitleAndInput from "./TitleAndInput";
 
 export {
   SuperheroPreview,
@@ -21,4 +23,6 @@ export {
   View,
   ItemList,
   LoadingComponent,
+  AddHeroModal,
+  TitleAndInput,
 };

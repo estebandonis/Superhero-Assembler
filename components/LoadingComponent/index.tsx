@@ -1,6 +1,6 @@
 import { SafeAreaView } from "react-native-safe-area-context";
 
-import { View, Text } from "@/components";
+import { View, Text } from "../Themed";
 import { styles } from "./style";
 
 export default function LoadingComponent() {

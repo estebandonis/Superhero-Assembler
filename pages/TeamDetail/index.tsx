@@ -6,6 +6,7 @@ import { View, Text, RoundedButtonWithIcon, LoadingComponent, ItemList, Superher
 import { styles } from "./style";
 import { useFetchHeroes, useFetchTeams } from "@/api";
 import { FontAwesome6 } from "@expo/vector-icons";
+import NativeBiometricAuth from "@/specs/NativeBiometricAuth";
 
 export default function TeamDetail() {
     const { data: teams, isLoading, isError } = useFetchTeams();
@@ -32,6 +33,14 @@ export default function TeamDetail() {
         });
     };
 
+    const handleOpenCreateTeam = async () => {
+        NativeBiometricAuth.authenticate('Please verify your identity', () => {
+            setIsModalVisible(true);
+        }, (error) => {
+            console.log(error);
+        });
+    };
+
     return (
         <SafeAreaView style={styles.container}>
             <View style={styles.content}>
@@ -40,7 +49,7 @@ export default function TeamDetail() {
                         <RoundedButtonWithIcon icon={<FontAwesome6 name="arrow-left" size={14} color="white" />} onPress={() => router.back()} />
                         <Text style={styles.title}>{selectedTeam?.name}</Text>
                     </View>
-                    <RoundedButtonWithIcon icon={<FontAwesome6 name="plus" size={14} color="white" />} onPress={() => setIsModalVisible(true)} />
+                    <RoundedButtonWithIcon icon={<FontAwesome6 name="plus" size={14} color="white" />} onPress={handleOpenCreateTeam} />
                 </View>
 
                 <ItemList items={selectedHeroes} RenderItem={({ item }) => <SuperheroPreview hero={item} onPress={() => handleSuperHeroPress(item.id)} />} />

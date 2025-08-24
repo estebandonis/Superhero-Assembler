@@ -14,6 +14,7 @@ import { useAddTeam, useFetchTeams } from '@/api';
 import { styles } from './style';
 import { team } from '@/types';
 import { useState } from 'react';
+import NativeBiometricAuth from '@/specs/NativeBiometricAuth';
 
 const renderItem = ({ item }: { item: team }) => (
   <TeamPreview id={item.id} title={item.name} membersCount={item.heroIds?.length || 0} />
@@ -36,6 +37,14 @@ export default function TeamList() {
     setModalVisible(false);
   };
 
+  const handleOpenCreateTeam = async () => {
+    NativeBiometricAuth.authenticate('Please verify your identity', () => {
+      setModalVisible(true);
+    }, (error) => {
+      console.log(error);
+    });
+  };
+
   return (
     <SafeAreaView style={styles.container}>
         <View style={styles.titleContainer}>
@@ -44,9 +53,7 @@ export default function TeamList() {
             icon={
                 <FontAwesome6 name="plus" size={14} color="white" />
             } 
-            onPress={() => {
-                setModalVisible(true);
-            }}
+            onPress={handleOpenCreateTeam}
           />
         </View>
         <ItemList items={teams} RenderItem={renderItem} />

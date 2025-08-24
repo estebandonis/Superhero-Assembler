@@ -2,7 +2,8 @@ import { enablePromise, openDatabase } from "react-native-sqlite-storage";
 import {
   getAllHeroes,
   getHeroById,
-  setHeroFavorite,
+  changeHerosFavorite,
+  insertHeroes,
   getAllTeams,
   getTeamById,
   createTeam,
@@ -18,7 +19,8 @@ export const getDBConnection = async () => {
 export {
   getAllHeroes,
   getHeroById,
-  setHeroFavorite,
+  changeHerosFavorite,
+  insertHeroes,
   getAllTeams,
   getTeamById,
   createTeam,

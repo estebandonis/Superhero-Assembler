@@ -5,13 +5,14 @@ import { useRouter, useLocalSearchParams } from "expo-router";
 import { Text, View, RoundedButtonWithIcon } from "@/components";
 import Colors from "@/constants/Colors";
 import { Ionicons, FontAwesome6 } from "@expo/vector-icons";
-import { useFetchHeroes } from "@/api";
-import { use, useEffect, useMemo } from "react";
+import { useFetchHeroes, useSetHeroFavorite } from "@/api";
+import { useMemo } from "react"
 
 export default function HeroDetailsPage() {
     const router = useRouter();
     const { id } = useLocalSearchParams();
     const { data: heroes, isLoading } = useFetchHeroes();
+    const { mutate: setHeroFavorite } = useSetHeroFavorite();
 
     if (isLoading) {
         return <Text>Loading...</Text>;
@@ -78,7 +79,7 @@ export default function HeroDetailsPage() {
                     />
                 }
                 onPress={() => {
-                    // Handle favorite button press
+                    setHeroFavorite({ id: selecteHero.id, favorite: !selecteHero.favorite });
                 }}
                 style={styles.favoriteButton}
             />

@@ -9,23 +9,32 @@ import {
 } from '@/components';
 import { styles } from './style';
 import { useFetchHeroes } from '@/api';
-import { useMemo, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { MaterialIcons } from '@expo/vector-icons';
 
+const renderItem = ({ item }: { item: hero }) => (
+  <SuperheroPreview
+    hero={item}
+  />
+);
+
+const itemSeparator = () => (
+  <View
+    style={{
+      height: 20,
+      backgroundColor: "transparent"
+    }}
+  />
+);
+
 export default function SuperHeroesScreen() {
-  const { data: heroes, isLoading } = useFetchHeroes();
+  const { data: heroes, isLoading, isError } = useFetchHeroes();
   const [searchTerm, setSearchTerm] = useState("");
 
   const filteredHeroes = useMemo(() => heroes?.filter((hero) =>
     hero.fullName.toLowerCase().startsWith(searchTerm.toLowerCase()) ||
     hero.alias.toLowerCase().startsWith(searchTerm.toLowerCase())
   ), [heroes, searchTerm]);
-
-  const renderItem = ({ item: hero }: { item: hero }) => (
-    <SuperheroPreview
-      hero={hero}
-    />
-  );
 
   const HeroesList = () => {
     if (filteredHeroes && filteredHeroes.length === 0) {
@@ -47,15 +56,6 @@ export default function SuperHeroesScreen() {
       />
     );
   }
-
-  const itemSeparator = () => (
-    <View
-      style={{
-        height: 20,
-        backgroundColor: "transparent"
-      }}
-    />
-  );
 
   if (isLoading) {
     return (

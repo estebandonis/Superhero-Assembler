@@ -2,7 +2,9 @@ import { MaterialIcons, Ionicons, FontAwesome6 } from '@expo/vector-icons';
 import { Image, TouchableOpacity } from 'react-native';
 import { useRouter } from 'expo-router';
 
-import { View, Text, RoundedButtonWithIcon } from '@/components';
+import { RoundedButtonWithIcon } from '../Buttons';
+import { useSetHeroFavorite } from '@/api';
+import { View, Text } from '../Themed';
 import { styles } from './style';
 import { hero } from '@/types';
 
@@ -11,6 +13,8 @@ interface SuperheroPreviewProps {
 }
 
 export default function SuperheroPreview({ hero }: SuperheroPreviewProps) {
+
+    const { mutate: setHeroFavorite } = useSetHeroFavorite();
 
     const router = useRouter();
 
@@ -47,7 +51,7 @@ export default function SuperheroPreview({ hero }: SuperheroPreviewProps) {
                     />
                 }
                 onPress={() => {
-                    // Handle info button press
+                    setHeroFavorite({ id: hero.id, favorite: !hero.favorite });
                 }}
             />
             <View style={styles.informationContainer}>

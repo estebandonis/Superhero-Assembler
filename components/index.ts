@@ -1,4 +1,5 @@
 import SuperheroPreview from "./SuperheroPreview";
+import { ItemList } from "./ItemList";
 import { RoundedButtonWithIcon } from "./Buttons";
 import EditScreenInfo from "./EditScreenInfo";
 import { ExternalLink } from "./ExternalLink";
@@ -11,4 +12,5 @@ export {
   ExternalLink,
   Text,
   View,
+  ItemList,
 };

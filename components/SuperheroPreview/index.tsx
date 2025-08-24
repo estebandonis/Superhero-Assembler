@@ -1,5 +1,5 @@
-import { MaterialIcons, Ionicons, FontAwesome6 } from '@expo/vector-icons';
-import { ActivityIndicator, Image, TouchableOpacity } from 'react-native';
+import { Ionicons, FontAwesome6 } from '@expo/vector-icons';
+import { Image, TouchableOpacity } from 'react-native';
 import { useRouter } from 'expo-router';
 
 import { RoundedButtonWithIcon } from '../Buttons';

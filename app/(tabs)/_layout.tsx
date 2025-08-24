@@ -44,7 +44,7 @@ export default function TabLayout() {
         }}
       />
       <Tabs.Screen
-        name="teams/index"
+        name="(teams)"
         options={{
           title: 'Teams',
           headerShown: false,

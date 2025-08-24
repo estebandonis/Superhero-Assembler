@@ -28,7 +28,7 @@ export default function TabLayout() {
         headerShown: useClientOnlyValue(false, true),
       }}>
       <Tabs.Screen
-        name="index/index"
+        name="index"
         options={{
           title: 'Superheroes',
           headerShown: false,
@@ -36,7 +36,7 @@ export default function TabLayout() {
         }}
       />
       <Tabs.Screen
-        name="favorites/index"
+        name="favorites"
         options={{
           title: 'Favorites',
           headerShown: false,

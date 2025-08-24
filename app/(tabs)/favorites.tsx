@@ -1,7 +1,3 @@
-
-import { Text, View } from '@/components/Themed';
-import { styles } from './style';
-import { SafeAreaView } from 'react-native-safe-area-context';
 import { SuperheroList } from '@/pages/SuperheroList';
 import { useFetchHeroes } from '@/api/superheroes';
 import { useMemo } from 'react';

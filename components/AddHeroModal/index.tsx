@@ -18,7 +18,7 @@ import LoadingComponent from "../LoadingComponent";
 
 const renderComponent = ({ item, onPressHero, onPressAdd }: { item: hero, onPressHero: (id: number) => void, onPressAdd: (id: number) => void }) => (
     <View style={{ flexDirection: "row", alignItems: "center", justifyContent: "space-between", backgroundColor: 'transparent' }}>
-        <SuperheroPreview hero={item} onPress={() => onPressHero(item.id)} />
+        <SuperheroPreview hero={item} onPress={() => onPressHero(item.id)} showFavorite={false} />
         <RoundedButtonWithIcon icon={<FontAwesome6 name="plus" color="white" />} onPress={() => onPressAdd(item.id)} />
     </View>
 );

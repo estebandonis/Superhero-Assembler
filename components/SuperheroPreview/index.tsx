@@ -11,9 +11,10 @@ import { hero } from '@/types';
 interface SuperheroPreviewProps {
     hero: hero
     onPress?: () => void;
+    showFavorite?: boolean;
 }
 
-export default function SuperheroPreview({ hero, onPress }: SuperheroPreviewProps) {
+export default function SuperheroPreview({ hero, onPress, showFavorite = true }: SuperheroPreviewProps) {
 
     const { mutate: setHeroFavorite } = useSetHeroFavorite();
 
@@ -37,11 +38,12 @@ export default function SuperheroPreview({ hero, onPress }: SuperheroPreviewProp
                 style={styles.imagePreview}
                 loadingIndicatorSource={require("@/assets/images/adaptive-icon.png")}
             />
-            <RoundedButtonWithIcon
-                style={styles.favoriteButton}
-                icon={
-                    <FontAwesome6
-                        solid={hero.favorite ? true : false}
+            {showFavorite && (
+                <RoundedButtonWithIcon
+                    style={styles.favoriteButton}
+                    icon={
+                        <FontAwesome6
+                            solid={hero.favorite ? true : false}
                         name="heart"
                         size={16}
                         color="white"
@@ -50,7 +52,7 @@ export default function SuperheroPreview({ hero, onPress }: SuperheroPreviewProp
                 onPress={() => {
                     setHeroFavorite({ id: hero.id, favorite: !hero.favorite });
                 }}
-            />
+            />)}
             <View style={styles.informationContainer}>
                 {TextName(hero.alias, hero.fullName)}
                 {TextRealName(hero.fullName)}

@@ -14,3 +14,16 @@
 - Un aspecto que no implementé es la eliminación y edición de un equipo. No lo implementé porque no se tenía dentro de los requerimientos originales del proyecto, por lo que no lo consideré necesario para la funcionalidad de la app.
 - También se podría implementar autenticación de usuario, para que los usuarios puedan guardar sus superhéroes favoritos y equipos de superhéroes a una cuenta, y así poder tener los datos tanto localmente como en el servidor.
 - Otro aspecto que no implementé es la sincronización de la base de datos local con el servidor, esto fue más que todo porque no se tiene una API backend que almacene la información de los superhéroes favoritos y equipos de supehéroes por cuenta, por lo que no se puede sincronizar la base de datos local con el servidor.
+
+
+Video Demostración:
+
+
+
+
+
+
+
+https://github.com/user-attachments/assets/e9085034-16b1-490d-9755-66f585795955
+
+
